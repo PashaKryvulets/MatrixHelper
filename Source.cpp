@@ -87,7 +87,7 @@ Matrix Matrix::operator+(const Matrix& other) const {
 
     Matrix Matrix::operator*(const Matrix & other) const {
         if (cols != other.rows) {
-            throw std::runtime_error("Number of columns in the first matrix must be equal to the number of rows in the second matrix for multiplication.");
+            throw std::runtime_error("Number of columns in the first matrix must be equal to the number of rows\n in the second matrix for multiplication.");
         }
 
         Matrix result(rows, other.cols);
