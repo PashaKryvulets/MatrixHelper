@@ -1,129 +1,105 @@
-﻿#include <iostream>
 #include "Header.h"
+#include <iostream>
+#include <limits>
 
+Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols) {
+    data.resize(rows, std::vector<int>(cols, 0));
+}
 
-
-int main() {
-    int multiplicand = 0;
-
+int getPositiveNumber(const std::string& prompt) {
+    int number;
     while (true) {
-        std::cout << "Matrix operations" << std::endl << std::endl;
+        std::cout << prompt;
+        if (std::cin >> number && number > 0) {
+            break;
+        }
+        else {
+            std::cout << "Please enter a positive integer." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+    }
+    return number;
+}
 
-        std::cout << "Matrix_1" << std::endl;
-        int rows = getPositiveNumber("Enter the number of rows: ");
-        int cols = getPositiveNumber("Enter the number of columns: ");
-        std::cout << std::endl;
+void Matrix::fillMatrix() {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            std::cout << "Enter element at position (" << i << ", " << j << "): ";
 
-        Matrix matrix1(rows, cols);
-        std::cout << "Enter values for matrix_1:" << std::endl;
-        matrix1.fillMatrix();
-        std::cout << std::endl;
-
-        std::cout << "Matrix_2" << std::endl;
-        rows = getPositiveNumber("Enter the number of rows: ");
-        cols = getPositiveNumber("Enter the number of columns: ");
-        std::cout << std::endl;
-
-        Matrix matrix2(rows, cols);
-        std::cout << "Enter values for matrix_2:" << std::endl;
-        matrix2.fillMatrix();
-        std::cout << std::endl;
-
-        int choice;
-        while (true) {
-            std::cout << "Select operation:" << std::endl;
-            std::cout << "1. Addition (+)" << std::endl;
-            std::cout << "2. Subtraction (-)" << std::endl;
-            std::cout << "3. Multiplication (*)" << std::endl;
-            std::cout << "4. Multiply by a number" << std::endl;
-            std::cout << "Enter choice: ";
-            std::cin >> choice;
-            std::cout << std::endl << std::endl;
-
-            if (choice >= 1 && choice <= 3)
-            {
-                std::cout << "Matrix_2" << std::endl;
-                rows = getPositiveNumber("Enter the number of rows: ");
-                cols = getPositiveNumber("Enter the number of columns: ");
-                std::cout << std::endl;
-
-                Matrix matrix2(rows, cols);
-                std::cout << "Enter values for matrix_2:" << std::endl;
-                matrix2.fillMatrix();
-                std::cout << std::endl;
-                break; // выйти из цикла, если выбор верный
-            }
-            else if (choice == 4)
-            {
-               // int multiplicand;
-                std::cout << "Enter multiplicand: ";
-                while (!(std::cin >> multiplicand)) {
-                    std::cout << "Invalid input. Please enter a valid number: ";
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                }
-            }
-            else
-            {
-                std::cout << "Invalid choice! Try again." << std::endl;
+            while (!(std::cin >> data[i][j])) {
+                std::cout << "Invalid input. Please enter a valid number: ";
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
         }
+    }
+}
 
-
-        std::cout << "Entered matrices:" << std::endl;
-        std::cout << "Matrix_1:" << std::endl;
-        matrix1.printMatrix();
-
-        std::cout << "Matrix_2:" << std::endl;
-        matrix2.printMatrix();
-        std::cout << std::endl;
-
-        Matrix result(rows, cols);
-
-        switch (choice) {
-        case 1:
-                result = matrix1 + matrix2;
-                std::cout << "Sum of matrices" << std::endl;
-                result.printMatrix();
-                break;
-        case 2:
-                result = matrix1 - matrix2;
-                std::cout << "Subtraction of matrices:" << std::endl;
-                result.printMatrix();
-                break;
-        case 3:
-                result = matrix1 * matrix2;
-                std::cout << "Multiplication of matrices:" << std::endl;
-                result.printMatrix();
-                break;
-        case 4:
-                result = matrix1 * multiplicand;
-                std::cout << "Multiplication of the matrix by " << multiplicand << ":" << std::endl;
-                result.printMatrix();
-                break;
+void Matrix::printMatrix() const {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            std::cout << data[i][j] << " ";
         }
         std::cout << std::endl;
+    }
+}
 
-        std::string continuechoice;
-        while (true) {
-            std::cout << "Do you want to continue? ('Yes' or 'No'): ";
-            std::cin >> continuechoice;
-
-            if (continuechoice == "No") {
-                std::cout << "Exiting." << std::endl;
-
-                return 0;
-            }
-            else if (continuechoice == "Yes") {
-                break;
-                // Break the loop and continue with the rest of the program
-            }
-            else {
-                std::cout << "Invalid input. Try again." << std::endl;
-            }
+Matrix Matrix::operator*(int multiplicand) const {
+    Matrix result(rows, cols);
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            result.data[i][j] = data[i][j] * multiplicand;
         }
-        std::cout << std::endl << std::endl;
+    }
+    return result;
+}
+
+Matrix Matrix::operator+(const Matrix& other) const {
+    if (rows != other.rows || cols != other.cols) {
+        throw std::runtime_error("Matrix dimensions must be the same for addition.");
     }
 
-    return 0;
+    Matrix result(rows, cols);
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            result.data[i][j] = data[i][j] + other.data[i][j];
+        }
+    }
+
+    return result;
+
 }
+    Matrix Matrix::operator-(const Matrix & other) const {
+        if (rows != other.rows || cols != other.cols) {
+            throw std::runtime_error("Matrix dimensions must be the same for subtraction.");
+        }
+
+        Matrix result(rows, cols);
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                result.data[i][j] = data[i][j] - other.data[i][j];
+            }
+        }
+
+        return result;
+    }
+
+    Matrix Matrix::operator*(const Matrix & other) const {
+        if (cols != other.rows) {
+            throw std::runtime_error("Number of columns in the first matrix must be equal to the number of rows\n in the second matrix for multiplication.");
+        }
+
+        Matrix result(rows, other.cols);
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < other.cols; ++j) {
+                int sum = 0;
+                for (int k = 0; k < cols; ++k) {
+                    sum += data[i][k] * other.data[k][j];
+                }
+                result.data[i][j] = sum;
+            }
+        }
+
+        return result;
+    }
