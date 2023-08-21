@@ -74,14 +74,24 @@ int main() {
 
         switch (choice) {
         case 1:
-            result = matrix1 + matrix2;
-            std::cout << "Sum of matrices" << std::endl;
-            result.printMatrix();
+            try {
+                result = matrix1 + matrix2;
+                std::cout << "Sum of matrices" << std::endl;
+                result.printMatrix();
+            }
+            catch (const std::runtime_error& a) {
+                std::wcout << "Error: " << a.what() << std::endl;
+            }
             break;
         case 2:
+            try {
             result = matrix1 - matrix2;
             std::cout << "Subtraction of matrices:" << std::endl;
             result.printMatrix();
+        }
+        catch (const std::runtime_error& b) {
+            std::wcout << "Error: " << b.what() << std::endl;
+        }
             break;
         case 3:
             try {
