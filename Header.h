@@ -13,7 +13,7 @@ private:
     std::vector<std::vector<int>> data;
 
 public:
-    Matrix() = default;
+    Matrix() : rows(0), cols(0) {};
     Matrix(int rows, int cols);
     void fillMatrix();
     void printMatrix() const;
