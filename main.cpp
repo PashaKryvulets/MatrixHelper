@@ -4,7 +4,7 @@
 
 int main() {
     Matrix matrix1, matrix2;
-    int multiplicand;
+    int multiplicand = 0;
 
     while (true) {
         std::cout << "Matrix operations" << std::endl << std::endl;
@@ -49,7 +49,10 @@ int main() {
                 break;
             }
             else if (choice == 4) {
-                std::cout << "Enter multiplicand: ";
+                std::cout << "Matrix multiplication by a number" << std::endl;
+                std::cout << "Entered matrix:" << std::endl;
+                matrix1.printMatrix();
+                std::cout << "Multiplier:" << std::endl;
                 while (!(std::cin >> multiplicand)) {
                     std::cout << "Invalid input. Please enter a valid number: ";
                     std::cin.clear();
@@ -62,13 +65,6 @@ int main() {
             }
         }
 
-        std::cout << "Entered matrices:" << std::endl;
-        std::cout << "Matrix_1:" << std::endl;
-        matrix1.printMatrix();
-
-        std::cout << "Matrix_2:" << std::endl;
-        matrix2.printMatrix();
-        std::cout << std::endl;
 
         Matrix result(rows, cols);
 
@@ -77,6 +73,11 @@ int main() {
             try {
                 result = matrix1 + matrix2;
                 std::cout << "Sum of matrices" << std::endl;
+                std::cout << "Matrix_1:" << std::endl;
+                matrix1.printMatrix();
+                std::cout << "Matrix_2:" << std::endl;
+                matrix2.printMatrix();
+                std::cout << "Result:" << std::endl;
                 result.printMatrix();
             }
             catch (const std::runtime_error& a) {
@@ -86,7 +87,12 @@ int main() {
         case 2:
             try {
             result = matrix1 - matrix2;
-            std::cout << "Subtraction of matrices:" << std::endl;
+            std::cout << "Subtraction of matrices" << std::endl;
+            std::cout << "Matrix_1" << std::endl;
+            matrix1.printMatrix();
+            std::cout << "Matrix_2" << std::endl;
+            matrix2.printMatrix();
+            std::cout << "Result:" << std::endl;
             result.printMatrix();
         }
         catch (const std::runtime_error& b) {
@@ -96,7 +102,12 @@ int main() {
         case 3:
             try {
                 result = matrix1 * matrix2;
-                std::cout << "Multiplication of matrices:" << std::endl;
+                std::cout << "Multiplication of matrices" << std::endl;
+                std::cout << "Matrix_1:" << std::endl;
+                matrix1.printMatrix();
+                std::cout << "Matrix_2:" << std::endl;
+                matrix2.printMatrix();
+                std::cout << "Result:" << std::endl;
                 result.printMatrix();
             }
             catch (const std::runtime_error& e) {
@@ -104,8 +115,8 @@ int main() {
             }
             break;
         case 4:
+            std::cout << "Result: " << std::endl;
             result = matrix1 * multiplicand;
-            std::cout << "Multiplication of the matrix by " << multiplicand << ":" << std::endl;
             result.printMatrix();
             break;
         }
