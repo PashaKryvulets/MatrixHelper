@@ -10,11 +10,11 @@ int main() {
         std::cout << "Matrix operations" << std::endl << std::endl;
 
         std::cout << "Matrix_1" << std::endl;
-        int rows = getPositiveNumber("Enter the number of rows: ");
-        int cols = getPositiveNumber("Enter the number of columns: ");
+        int rows1 = getPositiveNumber("Enter the number of rows: ");
+        int cols1 = getPositiveNumber("Enter the number of columns: ");
         std::cout << std::endl;
 
-        matrix1 = Matrix(rows, cols);
+        matrix1 = Matrix(rows1, cols1);
         std::cout << "Enter values for matrix_1:" << std::endl;
         matrix1.fillMatrix();
         std::cout << std::endl;
@@ -73,7 +73,7 @@ int main() {
         }
 
 
-        Matrix result(rows, cols);
+        Matrix result(rows1, cols1);
 
         switch (choice) {
         case 1:
