@@ -19,17 +19,20 @@ int main() {
         matrix1.fillMatrix();
         std::cout << std::endl;
 
-        int choice;
-        while (true) {
+        
             std::cout << "Select operation:" << std::endl;
             std::cout << "1. Addition (+)" << std::endl;
             std::cout << "2. Subtraction (-)" << std::endl;
             std::cout << "3. Multiplication (*)" << std::endl;
             std::cout << "4. Multiply by a number" << std::endl;
-            std::cout << "Enter choice: ";
-
+            std::cout << "5. Find determinant" << std::endl;
+                std::cout << "Enter choice: ";
+            
+            int choice;
+            while (true) {
+                std::cout << "Enter choice: ";
             while (!(std::cin >> choice)) {
-                std::cout << "Invalid input. Please enter a valid number: ";
+                std::cout << "Invalid choice. Try again.\nEnter choice: ";
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
@@ -60,6 +63,10 @@ int main() {
                 }
                 break;
             }
+            else if (choice == 5)
+            {
+                break;
+            }
             else {
                 std::cout << "Invalid choice! Try again." << std::endl;
             }
@@ -86,18 +93,18 @@ int main() {
             break;
         case 2:
             try {
-            result = matrix1 - matrix2;
-            std::cout << "Subtraction of matrices" << std::endl;
-            std::cout << "Matrix_1" << std::endl;
-            matrix1.printMatrix();
-            std::cout << "Matrix_2" << std::endl;
-            matrix2.printMatrix();
-            std::cout << "Result:" << std::endl;
-            result.printMatrix();
-        }
-        catch (const std::runtime_error& b) {
-            std::wcout << "Error: " << b.what() << std::endl;
-        }
+                result = matrix1 - matrix2;
+                std::cout << "Subtraction of matrices" << std::endl;
+                std::cout << "Matrix_1" << std::endl;
+                matrix1.printMatrix();
+                std::cout << "Matrix_2" << std::endl;
+                matrix2.printMatrix();
+                std::cout << "Result:" << std::endl;
+                result.printMatrix();
+            }
+            catch (const std::runtime_error& b) {
+                std::wcout << "Error: " << b.what() << std::endl;
+            }
             break;
         case 3:
             try {
@@ -118,6 +125,17 @@ int main() {
             std::cout << "Result: " << std::endl;
             result = matrix1 * multiplicand;
             result.printMatrix();
+            break;
+        case 5:
+            try {
+                std::cout << "Matrix:" << std::endl;
+                matrix1.printMatrix();
+                double det = matrix1.determinant();
+                std::cout << "Determinant: " << det << std::endl;
+            }
+            catch (const std::runtime_error& e) {
+                std::wcout << "Error: " << e.what() << std::endl;
+            }
             break;
         }
         std::cout << std::endl;
