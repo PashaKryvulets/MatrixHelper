@@ -8,7 +8,7 @@ This C++ project is a matrix calculator that allows you to perform various matri
 - Matrix Subtraction
 - Matrix Multiplication
 - Scalar Multiplication
-- Determinant Calculation (Uncomment code in `main.cpp`)
+- Determinant Calculation
 
 ## Getting Started
 
