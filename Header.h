@@ -18,12 +18,12 @@ public:
     ~Matrix() {}
     void fillMatrix();
     void printMatrix() const;
+    double determinant() const;
     Matrix operator+(const Matrix& other) const;
     Matrix operator-(const Matrix& other) const;
     Matrix operator*(const Matrix& other) const;
     Matrix operator*(int multiplicand) const;
 };
-
 
 int getPositiveNumber(const std::string& prompt);
 //#endif // MATRIX_H
