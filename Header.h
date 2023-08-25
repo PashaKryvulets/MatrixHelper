@@ -15,6 +15,7 @@ private:
 public:
     Matrix() : rows(0), cols(0) {};
     Matrix(int rows, int cols);
+    ~Matrix() {}
     void fillMatrix();
     void printMatrix() const;
     Matrix operator+(const Matrix& other) const;
