@@ -17,6 +17,7 @@ jobs:
       run: sudo apt-get install cmake
     - name: Build project
       run: |
+        mkdir build
         cd build
         cmake ..
         make
