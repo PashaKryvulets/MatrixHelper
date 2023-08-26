@@ -1,6 +1,6 @@
 # MatrixHelper
 
-MatrixHelper is a C++ program that provides various matrix operations. It allows you to perform matrix addition, subtraction, multiplication, and more.
+MatrixHelper is a C++ program that provides various matrix operations. It allows you to perform matrix addition, subtraction, multiplication, and more. It was created by a student for students and beyond.
 
 ## Prerequisites
 
