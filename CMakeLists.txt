@@ -5,3 +5,7 @@ project(MatrixHelper)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(MatrixHelper Source.cpp main.cpp Header.h)
+
+enable_testing()
+
+add_test(NAME MyTest COMMAND MatrixHelper)
