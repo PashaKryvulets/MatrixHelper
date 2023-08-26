@@ -52,4 +52,4 @@ MatrixHelper is released under the [MIT License](LICENSE).
 
 If you'd like to contribute to MatrixHelper, feel free to open an issue or submit a pull request on the [GitHub repository](https://github.com/PashaKryvulets/MatrixHelper).
 
-Enjoy using MatrixHelper for your matrix operations!
+Enjoy using MatrixHelper for your matrix calculations!
